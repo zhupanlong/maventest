@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chatRobot.dao.BankMoneyMapper">
+  <resultMap id="BaseResultMap" type="com.chatRobot.model.BankMoney">
+    <constructor>
+      <idArg column="ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="LOANAPPLICATION" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="LOANCODE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="PERIOD" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ACCRUAL" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="CAPITAL" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, LOANAPPLICATION, LOANCODE, PERIOD, ACCRUAL, CAPITAL
+  </sql>
+  <select id="selectByExample" parameterType="com.chatRobot.model.BankMoneyExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_BANKMONEY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.chatRobot.model.BankMoneyExample">
+    delete from T_BANKMONEY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="com.chatRobot.model.BankMoney">
+    insert into T_BANKMONEY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="loanapplication != null">
+        LOANAPPLICATION,
+      </if>
+      <if test="loancode != null">
+        LOANCODE,
+      </if>
+      <if test="period != null">
+        PERIOD,
+      </if>
+      <if test="accrual != null">
+        ACCRUAL,
+      </if>
+      <if test="capital != null">
+        CAPITAL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="loanapplication != null">
+        #{loanapplication,jdbcType=VARCHAR},
+      </if>
+      <if test="loancode != null">
+        #{loancode,jdbcType=VARCHAR},
+      </if>
+      <if test="period != null">
+        #{period,jdbcType=VARCHAR},
+      </if>
+      <if test="accrual != null">
+        #{accrual,jdbcType=VARCHAR},
+      </if>
+      <if test="capital != null">
+        #{capital,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chatRobot.model.BankMoneyExample" resultType="java.lang.Long">
+    select count(*) from T_BANKMONEY
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_BANKMONEY
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loanapplication != null">
+        LOANAPPLICATION = #{record.loanapplication,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loancode != null">
+        LOANCODE = #{record.loancode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.period != null">
+        PERIOD = #{record.period,jdbcType=VARCHAR},
+      </if>
+      <if test="record.accrual != null">
+        ACCRUAL = #{record.accrual,jdbcType=VARCHAR},
+      </if>
+      <if test="record.capital != null">
+        CAPITAL = #{record.capital,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_BANKMONEY
+    set ID = #{record.id,jdbcType=VARCHAR},
+      LOANAPPLICATION = #{record.loanapplication,jdbcType=VARCHAR},
+      LOANCODE = #{record.loancode,jdbcType=VARCHAR},
+      PERIOD = #{record.period,jdbcType=VARCHAR},
+      ACCRUAL = #{record.accrual,jdbcType=VARCHAR},
+      CAPITAL = #{record.capital,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chatRobot.model.BankMoney">
+    update T_BANKMONEY
+    <set>
+      <if test="loanapplication != null">
+        LOANAPPLICATION = #{loanapplication,jdbcType=VARCHAR},
+      </if>
+      <if test="loancode != null">
+        LOANCODE = #{loancode,jdbcType=VARCHAR},
+      </if>
+      <if test="period != null">
+        PERIOD = #{period,jdbcType=VARCHAR},
+      </if>
+      <if test="accrual != null">
+        ACCRUAL = #{accrual,jdbcType=VARCHAR},
+      </if>
+      <if test="capital != null">
+        CAPITAL = #{capital,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectRecordsByPage" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from (
+    select
+    <if test="example.distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List"/>,ROWNUM RN
+    from T_BANKMONEY
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause"/>
+    </if>
+    <if test="example.orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    ) t
+    where 1=1
+    <if test="pagebean.endRow != null">
+      AND T.RN <![CDATA[<=]]> ${pagebean.endRow}
+    </if>
+    <if test="pagebean.startRow != null">
+      AND T.RN <![CDATA[>=]]> ${pagebean.startRow}
+    </if>
+  </select>
+</mapper>

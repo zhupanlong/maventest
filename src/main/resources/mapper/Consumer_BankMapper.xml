@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chatRobot.dao.Consumer_BankMapper">
+  <resultMap id="BaseResultMap" type="com.chatRobot.model.Consumer_Bank">
+    <constructor>
+      <idArg column="ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="CID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="BANK" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="CARDNO" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="CARDNAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="PROVINCE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="CITY" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="COUNTY" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ACTIVE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="BANKNAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="BANKNO" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="CUSTOMER_CODE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="CUSTOMER_NAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ID_CARD" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="MOBILE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="EMAIL" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ADDRESS" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, CID, BANK, CARDNO, CARDNAME, PROVINCE, CITY, COUNTY, ACTIVE, BANKNAME, BANKNO, 
+    CUSTOMER_CODE, CUSTOMER_NAME, ID_CARD, MOBILE, EMAIL, ADDRESS
+  </sql>
+  <select id="selectByExample" parameterType="com.chatRobot.model.Consumer_BankExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_CONSUMER_BANK
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.chatRobot.model.Consumer_BankExample">
+    delete from T_CONSUMER_BANK
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="com.chatRobot.model.Consumer_Bank">
+    insert into T_CONSUMER_BANK
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="cid != null">
+        CID,
+      </if>
+      <if test="bank != null">
+        BANK,
+      </if>
+      <if test="cardno != null">
+        CARDNO,
+      </if>
+      <if test="cardname != null">
+        CARDNAME,
+      </if>
+      <if test="province != null">
+        PROVINCE,
+      </if>
+      <if test="city != null">
+        CITY,
+      </if>
+      <if test="county != null">
+        COUNTY,
+      </if>
+      <if test="active != null">
+        ACTIVE,
+      </if>
+      <if test="bankname != null">
+        BANKNAME,
+      </if>
+      <if test="bankno != null">
+        BANKNO,
+      </if>
+      <if test="customerCode != null">
+        CUSTOMER_CODE,
+      </if>
+      <if test="customerName != null">
+        CUSTOMER_NAME,
+      </if>
+      <if test="idCard != null">
+        ID_CARD,
+      </if>
+      <if test="mobile != null">
+        MOBILE,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="address != null">
+        ADDRESS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null">
+        #{cid,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null">
+        #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="cardno != null">
+        #{cardno,jdbcType=VARCHAR},
+      </if>
+      <if test="cardname != null">
+        #{cardname,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null">
+        #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="active != null">
+        #{active,jdbcType=VARCHAR},
+      </if>
+      <if test="bankname != null">
+        #{bankname,jdbcType=VARCHAR},
+      </if>
+      <if test="bankno != null">
+        #{bankno,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chatRobot.model.Consumer_BankExample" resultType="java.lang.Long">
+    select count(*) from T_CONSUMER_BANK
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_CONSUMER_BANK
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cid != null">
+        CID = #{record.cid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bank != null">
+        BANK = #{record.bank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardno != null">
+        CARDNO = #{record.cardno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardname != null">
+        CARDNAME = #{record.cardname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.province != null">
+        PROVINCE = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.city != null">
+        CITY = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.county != null">
+        COUNTY = #{record.county,jdbcType=VARCHAR},
+      </if>
+      <if test="record.active != null">
+        ACTIVE = #{record.active,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankname != null">
+        BANKNAME = #{record.bankname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankno != null">
+        BANKNO = #{record.bankno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerCode != null">
+        CUSTOMER_CODE = #{record.customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.customerName != null">
+        CUSTOMER_NAME = #{record.customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idCard != null">
+        ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobile != null">
+        MOBILE = #{record.mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null">
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null">
+        ADDRESS = #{record.address,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_CONSUMER_BANK
+    set ID = #{record.id,jdbcType=VARCHAR},
+      CID = #{record.cid,jdbcType=VARCHAR},
+      BANK = #{record.bank,jdbcType=VARCHAR},
+      CARDNO = #{record.cardno,jdbcType=VARCHAR},
+      CARDNAME = #{record.cardname,jdbcType=VARCHAR},
+      PROVINCE = #{record.province,jdbcType=VARCHAR},
+      CITY = #{record.city,jdbcType=VARCHAR},
+      COUNTY = #{record.county,jdbcType=VARCHAR},
+      ACTIVE = #{record.active,jdbcType=VARCHAR},
+      BANKNAME = #{record.bankname,jdbcType=VARCHAR},
+      BANKNO = #{record.bankno,jdbcType=VARCHAR},
+      CUSTOMER_CODE = #{record.customerCode,jdbcType=VARCHAR},
+      CUSTOMER_NAME = #{record.customerName,jdbcType=VARCHAR},
+      ID_CARD = #{record.idCard,jdbcType=VARCHAR},
+      MOBILE = #{record.mobile,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR},
+      ADDRESS = #{record.address,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chatRobot.model.Consumer_Bank">
+    update T_CONSUMER_BANK
+    <set>
+      <if test="cid != null">
+        CID = #{cid,jdbcType=VARCHAR},
+      </if>
+      <if test="bank != null">
+        BANK = #{bank,jdbcType=VARCHAR},
+      </if>
+      <if test="cardno != null">
+        CARDNO = #{cardno,jdbcType=VARCHAR},
+      </if>
+      <if test="cardname != null">
+        CARDNAME = #{cardname,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        PROVINCE = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        CITY = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null">
+        COUNTY = #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="active != null">
+        ACTIVE = #{active,jdbcType=VARCHAR},
+      </if>
+      <if test="bankname != null">
+        BANKNAME = #{bankname,jdbcType=VARCHAR},
+      </if>
+      <if test="bankno != null">
+        BANKNO = #{bankno,jdbcType=VARCHAR},
+      </if>
+      <if test="customerCode != null">
+        CUSTOMER_CODE = #{customerCode,jdbcType=VARCHAR},
+      </if>
+      <if test="customerName != null">
+        CUSTOMER_NAME = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        ID_CARD = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        MOBILE = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectRecordsByPage" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from (
+    select
+    <if test="example.distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List"/>,ROWNUM RN
+    from T_CONSUMER_BANK
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause"/>
+    </if>
+    <if test="example.orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    ) t
+    where 1=1
+    <if test="pagebean.endRow != null">
+      AND T.RN <![CDATA[<=]]> ${pagebean.endRow}
+    </if>
+    <if test="pagebean.startRow != null">
+      AND T.RN <![CDATA[>=]]> ${pagebean.startRow}
+    </if>
+  </select>
+</mapper>

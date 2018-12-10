@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chatRobot.dao.DeductMapper">
+  <resultMap id="BaseResultMap" type="com.chatRobot.model.Deduct">
+    <constructor>
+      <idArg column="ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="MCHNTCD" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="MCHNTPASS" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="BANKNO" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="BANKNAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="CUSNM" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="MOBILENO" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="CREDTNO" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ACNTNO" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ACNTNM" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ACNTPRO" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ACNTCITY" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="LOANAMOUNT" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="ORDERNUM" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="SERIALNUM" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="PLATFORM" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="DEDUCTRES" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="DEDUCTTIME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="STATE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="REMARK" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, MCHNTCD, MCHNTPASS, BANKNO, BANKNAME, CUSNM, MOBILENO, CREDTNO, ACNTNO, ACNTNM, 
+    ACNTPRO, ACNTCITY, LOANAMOUNT, ORDERNUM, SERIALNUM, PLATFORM, DEDUCTRES, DEDUCTTIME, 
+    STATE, REMARK
+  </sql>
+  <select id="selectByExample" parameterType="com.chatRobot.model.DeductExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_DEDUCT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.chatRobot.model.DeductExample">
+    delete from T_DEDUCT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="com.chatRobot.model.Deduct">
+    insert into T_DEDUCT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="mchntcd != null">
+        MCHNTCD,
+      </if>
+      <if test="mchntpass != null">
+        MCHNTPASS,
+      </if>
+      <if test="bankno != null">
+        BANKNO,
+      </if>
+      <if test="bankname != null">
+        BANKNAME,
+      </if>
+      <if test="cusnm != null">
+        CUSNM,
+      </if>
+      <if test="mobileno != null">
+        MOBILENO,
+      </if>
+      <if test="credtno != null">
+        CREDTNO,
+      </if>
+      <if test="acntno != null">
+        ACNTNO,
+      </if>
+      <if test="acntnm != null">
+        ACNTNM,
+      </if>
+      <if test="acntpro != null">
+        ACNTPRO,
+      </if>
+      <if test="acntcity != null">
+        ACNTCITY,
+      </if>
+      <if test="loanamount != null">
+        LOANAMOUNT,
+      </if>
+      <if test="ordernum != null">
+        ORDERNUM,
+      </if>
+      <if test="serialnum != null">
+        SERIALNUM,
+      </if>
+      <if test="platform != null">
+        PLATFORM,
+      </if>
+      <if test="deductres != null">
+        DEDUCTRES,
+      </if>
+      <if test="deducttime != null">
+        DEDUCTTIME,
+      </if>
+      <if test="state != null">
+        STATE,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntcd != null">
+        #{mchntcd,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntpass != null">
+        #{mchntpass,jdbcType=VARCHAR},
+      </if>
+      <if test="bankno != null">
+        #{bankno,jdbcType=VARCHAR},
+      </if>
+      <if test="bankname != null">
+        #{bankname,jdbcType=VARCHAR},
+      </if>
+      <if test="cusnm != null">
+        #{cusnm,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileno != null">
+        #{mobileno,jdbcType=VARCHAR},
+      </if>
+      <if test="credtno != null">
+        #{credtno,jdbcType=VARCHAR},
+      </if>
+      <if test="acntno != null">
+        #{acntno,jdbcType=VARCHAR},
+      </if>
+      <if test="acntnm != null">
+        #{acntnm,jdbcType=VARCHAR},
+      </if>
+      <if test="acntpro != null">
+        #{acntpro,jdbcType=VARCHAR},
+      </if>
+      <if test="acntcity != null">
+        #{acntcity,jdbcType=VARCHAR},
+      </if>
+      <if test="loanamount != null">
+        #{loanamount,jdbcType=VARCHAR},
+      </if>
+      <if test="ordernum != null">
+        #{ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="serialnum != null">
+        #{serialnum,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null">
+        #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="deductres != null">
+        #{deductres,jdbcType=VARCHAR},
+      </if>
+      <if test="deducttime != null">
+        #{deducttime,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chatRobot.model.DeductExample" resultType="java.lang.Long">
+    select count(*) from T_DEDUCT
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_DEDUCT
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchntcd != null">
+        MCHNTCD = #{record.mchntcd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchntpass != null">
+        MCHNTPASS = #{record.mchntpass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankno != null">
+        BANKNO = #{record.bankno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankname != null">
+        BANKNAME = #{record.bankname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cusnm != null">
+        CUSNM = #{record.cusnm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobileno != null">
+        MOBILENO = #{record.mobileno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.credtno != null">
+        CREDTNO = #{record.credtno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acntno != null">
+        ACNTNO = #{record.acntno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acntnm != null">
+        ACNTNM = #{record.acntnm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acntpro != null">
+        ACNTPRO = #{record.acntpro,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acntcity != null">
+        ACNTCITY = #{record.acntcity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loanamount != null">
+        LOANAMOUNT = #{record.loanamount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ordernum != null">
+        ORDERNUM = #{record.ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serialnum != null">
+        SERIALNUM = #{record.serialnum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.platform != null">
+        PLATFORM = #{record.platform,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deductres != null">
+        DEDUCTRES = #{record.deductres,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deducttime != null">
+        DEDUCTTIME = #{record.deducttime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.state != null">
+        STATE = #{record.state,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null">
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_DEDUCT
+    set ID = #{record.id,jdbcType=VARCHAR},
+      MCHNTCD = #{record.mchntcd,jdbcType=VARCHAR},
+      MCHNTPASS = #{record.mchntpass,jdbcType=VARCHAR},
+      BANKNO = #{record.bankno,jdbcType=VARCHAR},
+      BANKNAME = #{record.bankname,jdbcType=VARCHAR},
+      CUSNM = #{record.cusnm,jdbcType=VARCHAR},
+      MOBILENO = #{record.mobileno,jdbcType=VARCHAR},
+      CREDTNO = #{record.credtno,jdbcType=VARCHAR},
+      ACNTNO = #{record.acntno,jdbcType=VARCHAR},
+      ACNTNM = #{record.acntnm,jdbcType=VARCHAR},
+      ACNTPRO = #{record.acntpro,jdbcType=VARCHAR},
+      ACNTCITY = #{record.acntcity,jdbcType=VARCHAR},
+      LOANAMOUNT = #{record.loanamount,jdbcType=VARCHAR},
+      ORDERNUM = #{record.ordernum,jdbcType=VARCHAR},
+      SERIALNUM = #{record.serialnum,jdbcType=VARCHAR},
+      PLATFORM = #{record.platform,jdbcType=VARCHAR},
+      DEDUCTRES = #{record.deductres,jdbcType=VARCHAR},
+      DEDUCTTIME = #{record.deducttime,jdbcType=VARCHAR},
+      STATE = #{record.state,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chatRobot.model.Deduct">
+    update T_DEDUCT
+    <set>
+      <if test="mchntcd != null">
+        MCHNTCD = #{mchntcd,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntpass != null">
+        MCHNTPASS = #{mchntpass,jdbcType=VARCHAR},
+      </if>
+      <if test="bankno != null">
+        BANKNO = #{bankno,jdbcType=VARCHAR},
+      </if>
+      <if test="bankname != null">
+        BANKNAME = #{bankname,jdbcType=VARCHAR},
+      </if>
+      <if test="cusnm != null">
+        CUSNM = #{cusnm,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileno != null">
+        MOBILENO = #{mobileno,jdbcType=VARCHAR},
+      </if>
+      <if test="credtno != null">
+        CREDTNO = #{credtno,jdbcType=VARCHAR},
+      </if>
+      <if test="acntno != null">
+        ACNTNO = #{acntno,jdbcType=VARCHAR},
+      </if>
+      <if test="acntnm != null">
+        ACNTNM = #{acntnm,jdbcType=VARCHAR},
+      </if>
+      <if test="acntpro != null">
+        ACNTPRO = #{acntpro,jdbcType=VARCHAR},
+      </if>
+      <if test="acntcity != null">
+        ACNTCITY = #{acntcity,jdbcType=VARCHAR},
+      </if>
+      <if test="loanamount != null">
+        LOANAMOUNT = #{loanamount,jdbcType=VARCHAR},
+      </if>
+      <if test="ordernum != null">
+        ORDERNUM = #{ordernum,jdbcType=VARCHAR},
+      </if>
+      <if test="serialnum != null">
+        SERIALNUM = #{serialnum,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null">
+        PLATFORM = #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="deductres != null">
+        DEDUCTRES = #{deductres,jdbcType=VARCHAR},
+      </if>
+      <if test="deducttime != null">
+        DEDUCTTIME = #{deducttime,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectRecordsByPage" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from (
+    select
+    <if test="example.distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List"/>,ROWNUM RN
+    from T_DEDUCT
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause"/>
+    </if>
+    <if test="example.orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    ) t
+    where 1=1
+    <if test="pagebean.endRow != null">
+      AND T.RN <![CDATA[<=]]> ${pagebean.endRow}
+    </if>
+    <if test="pagebean.startRow != null">
+      AND T.RN <![CDATA[>=]]> ${pagebean.startRow}
+    </if>
+  </select>
+</mapper>
