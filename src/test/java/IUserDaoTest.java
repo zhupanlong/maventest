@@ -60,5 +60,4 @@ public class IUserDaoTest {
 //        userDao.updateByPrimaryKey(user);
         System.out.println(CreateIdNO.CreateIdNO("BankMoney"));
     }
-
 }
