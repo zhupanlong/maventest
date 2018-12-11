@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chatRobot.dao.LoanApplicationMapper">
+  <resultMap id="BaseResultMap" type="com.chatRobot.model.LoanApplication">
+    <constructor>
+      <idArg column="ID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="CID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="PID" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="CUSNAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="PRONAME" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="LOANCODE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="LOANDATE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="LOANAMOUNT" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="COVERAGEDATE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="PRODUCT" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="AUDITOR" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="AUDITORDATE" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="STATUS" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="APPOINTDATE" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    ID, CID, PID, CUSNAME, PRONAME, LOANCODE, LOANDATE, LOANAMOUNT, COVERAGEDATE, PRODUCT, 
+    AUDITOR, AUDITORDATE, STATUS, APPOINTDATE
+  </sql>
+  <select id="selectByExample" parameterType="com.chatRobot.model.LoanApplicationExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_LOANAPPLICATION
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.chatRobot.model.LoanApplicationExample">
+    delete from T_LOANAPPLICATION
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="com.chatRobot.model.LoanApplication">
+    insert into T_LOANAPPLICATION
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="cid != null">
+        CID,
+      </if>
+      <if test="pid != null">
+        PID,
+      </if>
+      <if test="cusname != null">
+        CUSNAME,
+      </if>
+      <if test="proname != null">
+        PRONAME,
+      </if>
+      <if test="loancode != null">
+        LOANCODE,
+      </if>
+      <if test="loandate != null">
+        LOANDATE,
+      </if>
+      <if test="loanamount != null">
+        LOANAMOUNT,
+      </if>
+      <if test="coveragedate != null">
+        COVERAGEDATE,
+      </if>
+      <if test="product != null">
+        PRODUCT,
+      </if>
+      <if test="auditor != null">
+        AUDITOR,
+      </if>
+      <if test="auditordate != null">
+        AUDITORDATE,
+      </if>
+      <if test="status != null">
+        STATUS,
+      </if>
+      <if test="appointdate != null">
+        APPOINTDATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null">
+        #{cid,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="cusname != null">
+        #{cusname,jdbcType=VARCHAR},
+      </if>
+      <if test="proname != null">
+        #{proname,jdbcType=VARCHAR},
+      </if>
+      <if test="loancode != null">
+        #{loancode,jdbcType=VARCHAR},
+      </if>
+      <if test="loandate != null">
+        #{loandate,jdbcType=VARCHAR},
+      </if>
+      <if test="loanamount != null">
+        #{loanamount,jdbcType=VARCHAR},
+      </if>
+      <if test="coveragedate != null">
+        #{coveragedate,jdbcType=VARCHAR},
+      </if>
+      <if test="product != null">
+        #{product,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null">
+        #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="auditordate != null">
+        #{auditordate,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="appointdate != null">
+        #{appointdate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chatRobot.model.LoanApplicationExample" resultType="java.lang.Long">
+    select count(*) from T_LOANAPPLICATION
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_LOANAPPLICATION
+    <set>
+      <if test="record.id != null">
+        ID = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cid != null">
+        CID = #{record.cid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pid != null">
+        PID = #{record.pid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cusname != null">
+        CUSNAME = #{record.cusname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.proname != null">
+        PRONAME = #{record.proname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loancode != null">
+        LOANCODE = #{record.loancode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loandate != null">
+        LOANDATE = #{record.loandate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loanamount != null">
+        LOANAMOUNT = #{record.loanamount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.coveragedate != null">
+        COVERAGEDATE = #{record.coveragedate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.product != null">
+        PRODUCT = #{record.product,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditor != null">
+        AUDITOR = #{record.auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditordate != null">
+        AUDITORDATE = #{record.auditordate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        STATUS = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.appointdate != null">
+        APPOINTDATE = #{record.appointdate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_LOANAPPLICATION
+    set ID = #{record.id,jdbcType=VARCHAR},
+      CID = #{record.cid,jdbcType=VARCHAR},
+      PID = #{record.pid,jdbcType=VARCHAR},
+      CUSNAME = #{record.cusname,jdbcType=VARCHAR},
+      PRONAME = #{record.proname,jdbcType=VARCHAR},
+      LOANCODE = #{record.loancode,jdbcType=VARCHAR},
+      LOANDATE = #{record.loandate,jdbcType=VARCHAR},
+      LOANAMOUNT = #{record.loanamount,jdbcType=VARCHAR},
+      COVERAGEDATE = #{record.coveragedate,jdbcType=VARCHAR},
+      PRODUCT = #{record.product,jdbcType=VARCHAR},
+      AUDITOR = #{record.auditor,jdbcType=VARCHAR},
+      AUDITORDATE = #{record.auditordate,jdbcType=VARCHAR},
+      STATUS = #{record.status,jdbcType=VARCHAR},
+      APPOINTDATE = #{record.appointdate,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chatRobot.model.LoanApplication">
+    update T_LOANAPPLICATION
+    <set>
+      <if test="cid != null">
+        CID = #{cid,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        PID = #{pid,jdbcType=VARCHAR},
+      </if>
+      <if test="cusname != null">
+        CUSNAME = #{cusname,jdbcType=VARCHAR},
+      </if>
+      <if test="proname != null">
+        PRONAME = #{proname,jdbcType=VARCHAR},
+      </if>
+      <if test="loancode != null">
+        LOANCODE = #{loancode,jdbcType=VARCHAR},
+      </if>
+      <if test="loandate != null">
+        LOANDATE = #{loandate,jdbcType=VARCHAR},
+      </if>
+      <if test="loanamount != null">
+        LOANAMOUNT = #{loanamount,jdbcType=VARCHAR},
+      </if>
+      <if test="coveragedate != null">
+        COVERAGEDATE = #{coveragedate,jdbcType=VARCHAR},
+      </if>
+      <if test="product != null">
+        PRODUCT = #{product,jdbcType=VARCHAR},
+      </if>
+      <if test="auditor != null">
+        AUDITOR = #{auditor,jdbcType=VARCHAR},
+      </if>
+      <if test="auditordate != null">
+        AUDITORDATE = #{auditordate,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="appointdate != null">
+        APPOINTDATE = #{appointdate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="selectRecordsByPage" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from (
+    select
+    <if test="example.distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List"/>,ROWNUM RN
+    from T_LOANAPPLICATION
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause"/>
+    </if>
+    <if test="example.orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    ) t
+    where 1=1
+    <if test="pagebean.endRow != null">
+      AND T.RN <![CDATA[<=]]> ${pagebean.endRow}
+    </if>
+    <if test="pagebean.startRow != null">
+      AND T.RN <![CDATA[>=]]> ${pagebean.startRow}
+    </if>
+  </select>
+</mapper>
