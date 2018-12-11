@@ -1,15 +1,16 @@
-import com.chatRobot.dao.UserMapper;
+import com.chatRobot.dao.DAO;
 import com.chatRobot.model.PageBean;
 import com.chatRobot.model.User;
 import com.chatRobot.model.UserExample;
+import com.chatRobot.service.impl.BaseCommonServiceImpl;
 import com.chatRobot.util.CreateIdNO;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,8 +22,8 @@ public class IUserDaoTest {
 
     @Autowired
     private DataSource dataSource;
-    @Autowired
-    private UserMapper userDao;
+    @Resource
+    private BaseCommonServiceImpl<User> baseCommonServiceImpl;
 
     @Test
     public void testSelectUser() {
@@ -42,16 +43,19 @@ public class IUserDaoTest {
 //        } catch (SQLException e) {
 //            e.printStackTrace();
 //        }
-        user = userDao.selectByPrimaryKey(id);
+//        user = userService.selectByPrimaryKey(id);
 //        UserExample.Criteria criteria= userExample.createCriteria();
 //        criteria.andIdLessThan("2");
 //        user = userDao.selectByExample(userExample).get(0);
 //        user = (User) userDao.selectRecordsByPage(pageBean,userExample).get(0);
-        System.out.println(user);
+        Object[] params=new Object[1];
+        params[0]=id;
+        User object = (User) this.baseCommonServiceImpl.invoke(baseCommonServiceImpl.getUserDao(), DAO.SELECTBYPRIMARYKEY,params);
+        System.out.println(object);
 //        user.setPassword("654321");
 //        user.setWeixin(null);
 //        userDao.updateByPrimaryKey(user);
-        System.out.println(CreateIdNO.CreateIdNO("BankMoney"));
+//        System.out.println(CreateIdNO.CreateIdNO("BankMoney"));
     }
 
 }
