@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import java.util.List;
 
 public interface DAO<T> {
+<<<<<<< HEAD
     public static final String COUNTBYEXAMPLE="countByExample";
     public static final String DELETEBYEXAMPLE="deleteByExample";
     public static final String DELETEBYPRIMARYKEY="deleteByPrimaryKey";
@@ -34,4 +35,7 @@ public interface DAO<T> {
     List<T> selectRecordsByPage(@Param("pagebean")PageBean pagebean, @Param("example")Example example);
 
 
+=======
+    List<T> selectRecordsByPage(@Param("pagebean")PageBean pagebean, @Param("example")Example example);
+>>>>>>> f90552ae305163f29b3e2c0722b5817cd8dc1a52
 }

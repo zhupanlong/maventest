@@ -1,4 +1,5 @@
 package com.chatRobot.service;
 
-public interface IBankMoneyService{
+public interface IBankMoneyService  {
+
 }
