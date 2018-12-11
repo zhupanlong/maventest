@@ -31,7 +31,7 @@ public class CreateIdNO {
         String id="";
         try {
             Statement statement=createIdNO.dataSource.getConnection().createStatement();
-            String sql="SELECT lpad(seq_"+"bankmoney"+".nextval,20,'0') FROM dual";//看序列是否存在
+            String sql="SELECT lpad(seq_"+seq+".nextval,20,'0') FROM dual";//看序列是否存在
             ResultSet resultSet=statement.executeQuery(sql);
             if(resultSet.next()){//不存在则创建，存在则不处理
                 id=resultSet.getString(1);
@@ -50,7 +50,7 @@ public class CreateIdNO {
 
             ResultSet resultSet=statement.executeQuery(sql);
             if(!resultSet.next()){//不存在则创建，存在则不处理
-                sql="create sequence seq_"+seq+" cycle";
+                sql="create sequence seq_"+seq;
                 statement.execute(sql);
                 flag=true;
             }
