@@ -1,0 +1,27 @@
+.banner-left{ float:left;width:54.59%;height:90px;background-image:url(../images/003.jpg)}
+.banner-right{ float:right;width:44.1%;height:90px;background-image:url(../images/004.jpg)}
+.banner-font-left{
+  font-size: 15px;
+  color:#A3D1D1;
+  padding-left: 30px;
+  padding-top: 55px;
+  float:left;
+  width:44%;
+}
+.banner-font-right{
+  font-size: 15px;
+  color:#FF8000;
+  padding-top: 15px;
+  float:right;
+  width:50%;
+}
+.banner-login{
+  padding-top: 20px;
+  float:left;
+}
+a {font-size:15px} 
+a:link {color: #998022; text-decoration:none;}
+/*a:active:{color: red; }*/
+a:visited {color:#ff00ff;text-decoration:none;}
+a:hover {color: red; text-decoration:underline;}
+

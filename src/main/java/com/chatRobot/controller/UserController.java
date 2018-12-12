@@ -21,7 +21,7 @@ public class UserController {
 
 
     @RequestMapping("/showUser.do")
-    public ModelAndView selectUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String selectUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         String userId = request.getParameter("id");
@@ -32,9 +32,9 @@ public class UserController {
         System.out.println(user);
 //        response.getWriter().write(writeValueAsString(user));
 //        response.getWriter().close();
-        ModelAndView resMap=new ModelAndView();
-        resMap.setViewName("welcome");
-        return resMap;
+//        ModelAndView resMap=new ModelAndView();
+//        resMap.setViewName("userManage");
+        return "userManage";
     }
 
 }
