@@ -37,6 +37,9 @@ public class BaseCommonServiceImpl<T> implements IBaseCommonService<T> {
     @Resource
     private User_RoleMapper user_roleMapper;
 
+    @Resource
+    private ResearchItemMapper researchItemMapper;
+
     public Object invoke(DAO dao, String methodName, Object[] args){
         Object result=null;
         try {
@@ -109,5 +112,9 @@ public class BaseCommonServiceImpl<T> implements IBaseCommonService<T> {
 
     public User_RoleMapper getUser_roleMapper() {
         return user_roleMapper;
+    }
+
+    public ResearchItemMapper getResearchItemMapper() {
+        return researchItemMapper;
     }
 }

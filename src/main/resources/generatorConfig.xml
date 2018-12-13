@@ -139,7 +139,8 @@
         <table tableName="t_customer" schema="" domainObjectName="Customer"></table>
         <table tableName="t_consumer_bank" schema="" domainObjectName="Consumer_Bank"></table>-->
         <!--<table tableName="t_bankmoney" schema="" domainObjectName="BankMoney"></table>-->
-        <table tableName="t_tree" schema="" domainObjectName="Tree"/>
+        <!--<table tableName="t_tree" schema="" domainObjectName="Tree"/>-->
         <!--<table tableName="t_user_role" schema="" domainObjectName="User_Role"></table>-->
+        <table tableName="t_researchitem" schema="" domainObjectName="ResearchItem"/>
     </context>
 </generatorConfiguration>

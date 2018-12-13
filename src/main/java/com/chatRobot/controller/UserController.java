@@ -3,10 +3,7 @@ package com.chatRobot.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import com.chatRobot.dao.DAO;
-import com.chatRobot.model.Example;
-import com.chatRobot.model.PageBean;
-import com.chatRobot.model.User;
-import com.chatRobot.model.UserExample;
+import com.chatRobot.model.*;
 import com.chatRobot.service.impl.BaseCommonServiceImpl;
 import net.sf.json.JSONObject;
 import org.apache.ibatis.annotations.Param;
@@ -32,6 +29,7 @@ public class UserController {
 
     @RequestMapping("/showUser.do")
     public String selectUser() throws IOException {
+        this.setResearchItem();
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
         String userId = request.getParameter("id");
@@ -48,8 +46,6 @@ public class UserController {
     @RequestMapping(value = "/selectRecordsByPage.do")
     @ResponseBody
     public String selectRecordsByPage(@Param("pagebean")PageBean pagebean, @Param("")Example example){
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("text/html;charset=UTF-8");
         UserExample userExample=new UserExample();
 //        UserExample.Criteria criteria= userExample.createCriteria();
 //        criteria.andIdIsNotNull();
@@ -67,5 +63,14 @@ public class UserController {
         String json=jsonObject.toString();
         return json;
     }
-
+    public boolean setResearchItem(){
+        Object[] params=new Object[1];
+        ResearchItemExample researchItemExample=new ResearchItemExample();
+        ResearchItemExample.Criteria criteria=researchItemExample.createCriteria();
+        criteria.andResearchflagEqualTo("1");
+        params[0]=researchItemExample;
+        List<ResearchItem> list= (List<ResearchItem>) this.baseCommonServiceImpl.invoke(baseCommonServiceImpl.getResearchItemMapper(),DAO.SELECTBYEXAMPLE,params);
+        request.setAttribute("itemlist",list);
+        return true;
+    }
 }

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chatRobot.dao.ResearchItemMapper">
+  <resultMap id="BaseResultMap" type="com.chatRobot.model.ResearchItem">
+    <result column="TABLENAME" jdbcType="VARCHAR" property="tablename" />
+    <result column="COLUMNNAME" jdbcType="VARCHAR" property="columnname" />
+    <result column="DESCRIPTION" jdbcType="VARCHAR" property="description" />
+    <result column="COMMENTS" jdbcType="VARCHAR" property="comments" />
+    <result column="RESEARCHFLAG" jdbcType="CHAR" property="researchflag" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    TABLENAME, COLUMNNAME, DESCRIPTION, COMMENTS, RESEARCHFLAG
+  </sql>
+  <select id="selectByExample" parameterType="com.chatRobot.model.ResearchItemExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from T_RESEARCHITEM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.chatRobot.model.ResearchItemExample">
+    delete from T_RESEARCHITEM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="com.chatRobot.model.ResearchItem">
+    insert into T_RESEARCHITEM
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tablename != null">
+        TABLENAME,
+      </if>
+      <if test="columnname != null">
+        COLUMNNAME,
+      </if>
+      <if test="description != null">
+        DESCRIPTION,
+      </if>
+      <if test="comments != null">
+        COMMENTS,
+      </if>
+      <if test="researchflag != null">
+        RESEARCHFLAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tablename != null">
+        #{tablename,jdbcType=VARCHAR},
+      </if>
+      <if test="columnname != null">
+        #{columnname,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="comments != null">
+        #{comments,jdbcType=VARCHAR},
+      </if>
+      <if test="researchflag != null">
+        #{researchflag,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.chatRobot.model.ResearchItemExample" resultType="java.lang.Long">
+    select count(*) from T_RESEARCHITEM
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update T_RESEARCHITEM
+    <set>
+      <if test="record.tablename != null">
+        TABLENAME = #{record.tablename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.columnname != null">
+        COLUMNNAME = #{record.columnname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.description != null">
+        DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.comments != null">
+        COMMENTS = #{record.comments,jdbcType=VARCHAR},
+      </if>
+      <if test="record.researchflag != null">
+        RESEARCHFLAG = #{record.researchflag,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update T_RESEARCHITEM
+    set TABLENAME = #{record.tablename,jdbcType=VARCHAR},
+      COLUMNNAME = #{record.columnname,jdbcType=VARCHAR},
+      DESCRIPTION = #{record.description,jdbcType=VARCHAR},
+      COMMENTS = #{record.comments,jdbcType=VARCHAR},
+      RESEARCHFLAG = #{record.researchflag,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <select id="selectRecordsByPage" parameterType="map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from (
+    select
+    <if test="example.distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List"/>,ROWNUM RN
+    from T_RESEARCHITEM
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause"/>
+    </if>
+    <if test="example.orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    ) t
+    where 1=1
+    <if test="pagebean.endRow != null">
+      AND T.RN <![CDATA[<=]]> ${pagebean.endRow}
+    </if>
+    <if test="pagebean.startRow != null">
+      AND T.RN <![CDATA[>=]]> ${pagebean.startRow}
+    </if>
+  </select>
+</mapper>
