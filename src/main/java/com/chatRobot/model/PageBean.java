@@ -8,46 +8,46 @@ import java.util.Map;
 public class PageBean implements Serializable {
 
 	private static final long serialVersionUID = -7376883092589241260L;
-	private int pageNumber;
-	private int pageSize;
+	private int page;
+	private int rows;
 	private int startRow;
 	private int endRow;
 	private Map<String, Object> map;// 封装参数
 	private List<?> list = new ArrayList<>();
 	private int rowCount;
 
-	public int getPageNumber() {
-		return pageNumber;
+	public int getPage() {
+		return page;
 	}
 
-	public void setPageNumber(int pageNumber) {
-		this.pageNumber = pageNumber;
+	public void setPage(int page) {
+		this.page = page;
 	}
 
-	public int getPageSize() {
-		return pageSize;
+	public int getRows() {
+		return rows;
 	}
 
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
+	public void setRows(int rows) {
+		this.rows = rows;
 	}
 
 	public int getStartRow() {
-		this.startRow = (pageNumber - 1) * pageSize + 1;
+		this.startRow = (page - 1) * rows + 1;
 		return  startRow;
 	}
 
 	public void setStartRow(int startRow) {
-		this.startRow = (pageNumber - 1) * pageSize + 1;
+		this.startRow = (page - 1) * rows + 1;
 	}
 
 	public int getEndRow() {
-		this.endRow = pageNumber * pageSize;
+		this.endRow = page * rows;
 		return endRow;
 	}
 
 	public void setEndRow(int endRow) {
-		this.endRow = pageNumber * pageSize;
+		this.endRow = page * rows;
 	}
 
 	public Map<String, Object> getMap() {
@@ -75,9 +75,9 @@ public class PageBean implements Serializable {
 	}
 
 	// 设置分页统一方法
-	public void setPagein(int pageNumber, int pagesize) {
-		setPageNumber(pageNumber);
-		setPageSize(pagesize);
+	public void setPagein(int page, int rows) {
+		setPage(page);
+		setRows(rows);
 		getStartRow();
 		getEndRow();
 	}

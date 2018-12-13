@@ -22,8 +22,8 @@ public class IUserDaoTest {
        String id = "1";
         User user =null;
         PageBean pageBean=new PageBean();
-        pageBean.setPageNumber(1);
-        pageBean.setPageSize(2);
+        pageBean.setPage(1);
+        pageBean.setRows(2);
         UserExample userExample=new UserExample();
 //        try {
 //            Statement statement=dataSource.getConnection().prepareStatement("Select * from t_user");

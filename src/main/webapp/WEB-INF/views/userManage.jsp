@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=Utf-8"
-	pageEncoding="Utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
 %>
@@ -16,8 +16,14 @@
 </head>
 <body>
 	<div>
-		<div id="toolbar">
-			<label>用户名：</label><input id="s_username" class="easyui-textbox" />
+		<div id="toolbar" >
+			<label>查询选项：</label><select id="researchitem" name="researchitem"
+										class="easyui-combobox">
+			<option value="无">请选择</option>
+			<option value="男">名字</option>
+			<option value="女">qq</option>
+		</select>
+			<input id="s_username" class="easyui-textbox" />
 			<a href="javascript:searchUserByName()" class="easyui-linkbutton"
 				iconCls="icon-search">查询</a> <a href="javascript:reset()"
 				class="easyui-linkbutton" iconCls="icon-clear"></a> <a
@@ -156,7 +162,7 @@
 		$(function(){   
 			$('#userGird').datagrid({
 			    loadMsg: "正在加载数据，请稍等...", 
-			    url:path+"/user/getAllUser.do",
+			    url:path+"/user/selectRecordsByPage.do",
 			    fitColumns: true,
 			    rownumbers: true,
 			    toolbar:'#toolbar',

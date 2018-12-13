@@ -13,6 +13,22 @@
     <!-- 扫描web相关的bean -->
     <context:component-scan base-package="com.chatRobot"/>
 
+    <!--&lt;!&ndash; 启动Spring MVC的注解功能，完成请求和注解POJO的映射 JSON数据编码 &ndash;&gt;-->
+    <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" >-->
+        <!--<property name="messageConverters">-->
+            <!--<list>-->
+                <!--<bean class="org.springframework.http.converter.StringHttpMessageConverter">-->
+                    <!--<property name="supportedMediaTypes">-->
+                        <!--<list>-->
+                            <!--<value>text/plain;charset=utf-8</value>-->
+                            <!--<value>text/html;charset=UTF-8</value>-->
+                        <!--</list>-->
+                    <!--</property>-->
+                <!--</bean>-->
+            <!--</list>-->
+        <!--</property>-->
+    <!--</bean>-->
+
     <!-- 开启SpringMVC注解模式 -->
     <mvc:annotation-driven/>
 
