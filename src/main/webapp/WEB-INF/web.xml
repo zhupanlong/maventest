@@ -20,9 +20,17 @@
     <filter-name>encodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+
+  <!-- Session作用域配置属性 -->
+  <filter>
+    <filter-name>initResearchItemFilter</filter-name>
+    <filter-class>com.chatRobot.filter.InitResearchItemFilter</filter-class>
+  </filter>
   <filter-mapping>
-    <filter-name>encodingFilter</filter-name>
+    <filter-name>initResearchItemFilter</filter-name>
     <url-pattern>*.jsp</url-pattern>
+    <dispatcher>FORWARD</dispatcher>
+    <dispatcher>REQUEST</dispatcher>
   </filter-mapping>
   <!-- 配置DispatcherServlet -->
   <servlet>
@@ -41,6 +49,15 @@
     <!-- 匹配所有请求，此处也可以配置成 *.do 形式 -->
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+
+  <listener>
+    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>classpath:spring-*.xml</param-value>
+  </context-param>
+
 
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

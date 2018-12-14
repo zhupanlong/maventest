@@ -13,25 +13,22 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
-
     @Resource
     private  HttpServletRequest request;
-    @Resource
-    private HttpServletResponse response;
+
     @Resource
     private BaseCommonServiceImpl<User> baseCommonServiceImpl;
 
     @RequestMapping("/showUser.do")
     public String selectUser() throws IOException {
-        this.setResearchItem();
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
+//        this.setResearchItem();
         String userId = request.getParameter("id");
         Object[] params=new Object[1];
         params[0]=userId;
@@ -63,14 +60,5 @@ public class UserController {
         String json=jsonObject.toString();
         return json;
     }
-    public boolean setResearchItem(){
-        Object[] params=new Object[1];
-        ResearchItemExample researchItemExample=new ResearchItemExample();
-        ResearchItemExample.Criteria criteria=researchItemExample.createCriteria();
-        criteria.andResearchflagEqualTo("1");
-        params[0]=researchItemExample;
-        List<ResearchItem> list= (List<ResearchItem>) this.baseCommonServiceImpl.invoke(baseCommonServiceImpl.getResearchItemMapper(),DAO.SELECTBYEXAMPLE,params);
-        request.setAttribute("itemlist",list);
-        return true;
-    }
+
 }

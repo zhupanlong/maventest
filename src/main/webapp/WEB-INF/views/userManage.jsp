@@ -21,8 +21,10 @@
         <label>查询选项：</label>
         <select id="items" name="researchitem" class="easyui-combobox">
             <option value="" selected="selected">请选择</option>
-            <c:forEach items="${requestScope.itemlist}" var="item" varStatus="">
-                <option value="item.columnname">${item.description}</option>
+            <c:forEach items="${sessionScope.itemlist}" var="item" varStatus="">
+                <c:if test="${item.tablename=='T_USER'}">
+                    <option value="${item.columnname}">${item.description}</option>
+                </c:if>
             </c:forEach>
         </select>
         <input id="s_username" class="easyui-textbox"/>
@@ -206,7 +208,6 @@
                 }
             ]]
         });
-        loadChoose();
     });
 
     function deleteUser(id) {
