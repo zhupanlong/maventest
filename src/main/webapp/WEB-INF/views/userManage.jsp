@@ -19,7 +19,7 @@
 <div>
     <div id="toolbar">
         <label>查询选项：</label>
-        <select id="items" name="researchitem" class="easyui-combobox">
+        <select id="itemsselect" name="researchitem" class="easyui-combobox">
             <option value="" selected="selected">请选择</option>
             <c:forEach items="${sessionScope.itemlist}" var="item" varStatus="">
                 <c:if test="${item.tablename=='T_USER'}">
@@ -124,11 +124,12 @@
     }
 
     function searchUserByName() {
-        var sname = $("#s_username").textbox('getValue');
-        var url = path + "/user/getAllUser.do";
+        var keyword = $("#s_username").textbox('getValue');
+        var column=$("#itemsselect option:selected").val();
+        var url = path + "/user/selectRecordsByPage.do";
         $('#userGird').datagrid({
             url: url,
-            queryParams: {"sname": sname}
+            queryParams: {"keyword": keyword,"column":column}
         });
     }
 
@@ -254,14 +255,6 @@
         });
     }
 
-    function searchUser() {
-        var sname = $("#researchitem").textbox('getValue');
-        var url = path + "/user/selectRecordsByPage.do";
-        $('#userGird').datagrid({
-            url: url,
-            queryParams: {"sname": sname}
-        });
-    }
 
     //配置用户角色
     function loadRoleAuthority(id) {

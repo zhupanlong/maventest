@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.chatRobot.dao.DAO;
 import com.chatRobot.model.*;
 import com.chatRobot.service.impl.BaseCommonServiceImpl;
+import com.chatRobot.util.InvokeUtil;
 import net.sf.json.JSONObject;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
@@ -42,10 +43,9 @@ public class UserController {
     }
     @RequestMapping(value = "/selectRecordsByPage.do")
     @ResponseBody
-    public String selectRecordsByPage(@Param("pagebean")PageBean pagebean, @Param("")Example example){
+    public String selectRecordsByPage(@Param("pagebean")PageBean pagebean, @Param("keyword")String keyword,@Param("column")String column){
         UserExample userExample=new UserExample();
-//        UserExample.Criteria criteria= userExample.createCriteria();
-//        criteria.andIdIsNotNull();
+        UserExample.Criteria criteria= (UserExample.Criteria) InvokeUtil.invoke(userExample.createCriteria(),keyword,column);
         Object[] params=new Object[2];
         params[0]=pagebean;
         params[1]=userExample;
