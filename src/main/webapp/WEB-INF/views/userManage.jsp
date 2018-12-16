@@ -31,7 +31,7 @@
         <a href="javascript:searchUserByName()" class="easyui-linkbutton"
            iconCls="icon-search">查询</a> <a href="javascript:reset()"
                                            class="easyui-linkbutton" iconCls="icon-clear"></a> <a
-            href="javaScript:openaddOrUpdateUserFormDialog()"
+            href="javaScript:openAddOrUpdateUserFormDialog()"
             class="easyui-linkbutton" iconCls="icon-add">添加用户</a>
         <a href="javaScript:exportExcel()"
            class="easyui-linkbutton" iconCls="icon-print">导出到excel</a>
@@ -77,7 +77,7 @@
             </select>
             </div>
             <div>
-                <label>入职时间：</label><input id="u_regTime" name="regTime"
+                <label>入职时间：</label><input id="u_regtime" name="regtime"
                                            class="easyui-datebox"/>
             </div>
             <div>
@@ -114,7 +114,7 @@
 <script type="text/javascript">
     var path = '<%=path%>';
 
-    function openaddOrUpdateUserFormDialog() {
+    function openAddOrUpdateUserFormDialog() {
         $("#addOrUpdateUserFormDialog").dialog("open").dialog("setTitle",
             "添加用户");
     }
@@ -134,11 +134,11 @@
     }
 
     function reset() {
-        var sname = $("#s_username").textbox('getValue');
-        var url = path + "/user/getAllUser.do";
+        $("#s_username").textbox('setValue','');
+        var url = path + "/user/selectRecordsByPage.do";
         $('#userGird').datagrid({
             url: url,
-            queryParams: {"sname": null}
+            queryParams: {}
         });
     }
     function submitForm() {
@@ -190,7 +190,7 @@
                 {title: '邮箱', field: 'email', width: 100},
                 {title: 'QQ', field: 'qq', width: 100},
                 {title: '微信', field: 'weixin', width: 100},
-                {title: '注册日期', field: 'regTime', width: 100},
+                {title: '注册日期', field: 'regtime', width: 100},
                 {
                     title: '是否启用', field: 'enable', width: 100,
                     formatter: function (value, row, index) {
@@ -242,7 +242,7 @@
                 $("#u_name").textbox('setValue', data.name);
                 $("#u_password").hide();
                 $("#u_sex").combobox('setValue', data.sex);
-                $("#u_regTime").datebox('setValue', data.regTime);
+                $("#u_regtime").datebox('setValue', data.regtime);
                 $("#u_email").textbox('setValue', data.email);
                 $("#u_qq").textbox('setValue', data.qq);
                 $("#u_weixin").textbox('setValue', data.weixin);

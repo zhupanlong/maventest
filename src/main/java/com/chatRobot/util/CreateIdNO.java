@@ -42,7 +42,7 @@ public class CreateIdNO {
         return id;
     }
 
-    public static boolean createSequence(String seq){
+    private static boolean createSequence(String seq){
         boolean flag=false;
         try {
             Statement statement=createIdNO.dataSource.getConnection().createStatement();

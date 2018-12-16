@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.chatRobot.dao.DAO;
 import com.chatRobot.model.*;
 import com.chatRobot.service.impl.BaseCommonServiceImpl;
+import com.chatRobot.util.CreateIdNO;
 import com.chatRobot.util.InvokeUtil;
 import net.sf.json.JSONObject;
 import org.apache.ibatis.annotations.Param;
@@ -61,4 +62,30 @@ public class UserController {
         return json;
     }
 
+    @RequestMapping(value = "/saveOrUpdateUser.do")
+    @ResponseBody
+    public String saveOrUpdateUser(User user){
+        Object[] params=new Object[1];
+        params[0]=user;
+        if(null==user.getId()){
+            user.setId(CreateIdNO.CreateIdNO("user"));
+            return this.baseCommonServiceImpl.invoke(this.baseCommonServiceImpl.getUserDao(),DAO.INSERT,params).toString();
+        }
+        return this.baseCommonServiceImpl.invoke(this.baseCommonServiceImpl.getUserDao(),DAO.UPDATEBYPRIMARYKEY,params).toString();
+    }
+    @RequestMapping(value = "/deleteUserById.do")
+    @ResponseBody
+    public String deleteUserById(String id){
+        Object[] params=new Object[1];
+        params[0]=id;
+        return this.baseCommonServiceImpl.invoke(this.baseCommonServiceImpl.getUserDao(),DAO.DELETEBYPRIMARYKEY,params).toString();
+    }
+
+    @RequestMapping(value = "/getUserById.do")
+    @ResponseBody
+    public String getUserById(String id){
+        Object[] params=new Object[1];
+        params[0]=id;
+        return JSONObject.fromObject(this.baseCommonServiceImpl.invoke(this.baseCommonServiceImpl.getUserDao(),DAO.SELECTBYPRIMARYKEY,params)).toString();
+    }
 }
