@@ -67,7 +67,7 @@ public class UserController {
     public String saveOrUpdateUser(User user){
         Object[] params=new Object[1];
         params[0]=user;
-        if(null==user.getId()){
+        if(null==user.getId()||user.getId().isEmpty()){
             user.setId(CreateIdNO.CreateIdNO("user"));
             return this.baseCommonServiceImpl.invoke(this.baseCommonServiceImpl.getUserDao(),DAO.INSERT,params).toString();
         }
